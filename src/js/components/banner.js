@@ -9,7 +9,7 @@ class Banner extends Component {
   render() {
     return (
       <div id="banner">
-        <h1></h1>
+        <h1>{this.props.settings.title}</h1>
       </div>
     );
   }

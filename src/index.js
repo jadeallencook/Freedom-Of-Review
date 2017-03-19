@@ -27,31 +27,19 @@ fire.database = firebase.database();
 // cache settings data
 fire.settings = {};
 fire.settings.ref = fire.database.ref('settings');
-fire.settings.snap = {};
-
-// snapshot settings data
-fire.settings.ref.once('value').then(function(snapshot) {
-    fire.settings.snap.title = snapshot.child('title').val();
-    fire.settings.snap.email = snapshot.child('email').val();
-    fire.settings.snap.url = snapshot.child('url').val();
-});
 
 // main app build
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-          title: fire.settings.snap.title
-        };
-        console.log(fire.settings.snap.email);
-    }
     render() {
-        return (<Home title={this.state.title}  />);
+        // render homepage and pass it settings from firebase
+        return (<Home settings={this.props.settings}/>);
     }
 }
 
-export default App;
+// get settings from firebase and build app
+fire.settings.ref.on('value', function(data) {
+  ReactDOM.render(
+      <App settings={data.val()}/>, document.getElementById('app'));
+});
 
-// init render
-ReactDOM.render(
-    <App/>, document.getElementById('app'));
+export default App;
