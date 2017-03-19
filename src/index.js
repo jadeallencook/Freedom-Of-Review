@@ -1,5 +1,5 @@
 // import dependencies
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import * as firebase from 'firebase';
 
@@ -9,6 +9,11 @@ import './css/base.css';
 
 // import pages for routes
 import Home from './js/pages/home.js';
+import Login from './js/pages/login.js';
+import Signup from './js/pages/signup.js';
+import Police from './js/pages/police.js';
+import Officials from './js/pages/officials.js';
+import Offices from './js/pages/offices.js';
 
 // create firebase {} && cache config
 let fire = {};
@@ -28,18 +33,21 @@ fire.database = firebase.database();
 fire.settings = {};
 fire.settings.ref = fire.database.ref('settings');
 
-// main app build
-class App extends Component {
-    render() {
-        // render homepage and pass it settings from firebase
-        return (<Home settings={this.props.settings}/>);
-    }
-}
-
 // get settings from firebase and build app
 fire.settings.ref.on('value', function(data) {
-  ReactDOM.render(
-      <App settings={data.val()}/>, document.getElementById('app'));
+  // create router for pages
+  function router(hash) {
+    if (hash === '#/police') ReactDOM.render((<Police settings={data.val()} />), document.getElementById('app'));
+    else if (hash === '#/officials') ReactDOM.render((<Officials settings={data.val()} />), document.getElementById('app'));
+    else if (hash === '#/offices') ReactDOM.render((<Offices settings={data.val()} />), document.getElementById('app'));
+    else if (hash === '#/login') ReactDOM.render((<Login settings={data.val()} />), document.getElementById('app'));
+    else if (hash === '#/signup') ReactDOM.render((<Signup settings={data.val()} />), document.getElementById('app'));
+    else ReactDOM.render((<Home settings={data.val()} />), document.getElementById('app'));
+  }
+  // listen for page changes
+  window.addEventListener('hashchange',function(event){
+		router(window.location.hash);
+	});
+  // init app build based off of hash
+  router(window.location.hash);
 });
-
-export default App;

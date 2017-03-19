@@ -1,4 +1,20 @@
+/*
+  Color Pallet
+  blue #263B55
+  dblue #08182D
+  red #823A34
+  dred #440B07
+  yellow #827934
+  dyellow #443D07
+*/
+
 html,
 body {
   font-family: 'Helvetica';
+  height: 100%;
+  width: 100%;
+}
+
+div#app {
+  width: 100%;
 }
