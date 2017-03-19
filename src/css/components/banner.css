@@ -63,7 +63,7 @@ div#banner-btns-container div div:hover:not(#signup-banner-btn) {
 }
 
 /* login/signup */
-div#signup-banner-btn {
+div#signup-banner-btn, div#signout-banner-btn {
   border: solid .10em #fff;;
   border-radius: 3px;
 }

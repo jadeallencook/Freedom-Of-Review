@@ -29,25 +29,38 @@ fire.config = {
 firebase.initializeApp(fire.config);
 fire.database = firebase.database();
 
-// cache settings data
-fire.settings = {};
-fire.settings.ref = fire.database.ref('settings');
+// cache firebase data
+fire.settings = {
+  ref: fire.database.ref('settings')
+};
+fire.offices = {
+  ref: fire.database.ref('offices')
+};
 
 // get settings from firebase and build app
-fire.settings.ref.on('value', function(data) {
-  // create router for pages
-  function router(hash) {
-    if (hash === '#/police') ReactDOM.render((<Police settings={data.val()} />), document.getElementById('app'));
-    else if (hash === '#/officials') ReactDOM.render((<Officials settings={data.val()} />), document.getElementById('app'));
-    else if (hash === '#/offices') ReactDOM.render((<Offices settings={data.val()} />), document.getElementById('app'));
-    else if (hash === '#/login') ReactDOM.render((<Login settings={data.val()} />), document.getElementById('app'));
-    else if (hash === '#/signup') ReactDOM.render((<Signup settings={data.val()} />), document.getElementById('app'));
-    else ReactDOM.render((<Home settings={data.val()} />), document.getElementById('app'));
-  }
-  // listen for page changes
-  window.addEventListener('hashchange',function(event){
-		router(window.location.hash);
-	});
-  // init app build based off of hash
-  router(window.location.hash);
+fire.settings.ref.on('value', function(settings) {
+    // create router for pages
+    function router(hash) {
+        if (hash === '#/police') {
+            ReactDOM.render((<Police settings={settings.val()}/>), document.getElementById('app'));
+        } else if (hash === '#/officials') {
+            ReactDOM.render((<Officials settings={settings.val()}/>), document.getElementById('app'));
+        } else if (hash === '#/offices') {
+          fire.offices.ref.on('value', function(offices) {
+            ReactDOM.render((<Offices settings={settings.val()} offices={offices.val()} />), document.getElementById('app'));
+          });
+        } else if (hash === '#/login') {
+            ReactDOM.render((<Login settings={settings.val()}/>), document.getElementById('app'));
+        } else if (hash === '#/signup') {
+            ReactDOM.render((<Signup settings={settings.val()}/>), document.getElementById('app'));
+        } else {
+            ReactDOM.render((<Home settings={settings.val()}/>), document.getElementById('app'));
+        }
+    }
+    // listen for page changes
+    window.addEventListener('hashchange', function(event) {
+        router(window.location.hash);
+    });
+    // init app build based off of hash
+    router(window.location.hash);
 });
