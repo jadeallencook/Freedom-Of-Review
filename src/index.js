@@ -31,27 +31,27 @@ fire.database = firebase.database();
 
 // cache firebase data
 fire.settings = {
-  ref: fire.database.ref('settings')
+    ref: fire.database.ref('settings')
 };
 fire.offices = {
-  ref: fire.database.ref('offices')
+    ref: fire.database.ref('offices')
 };
 
 // get settings from firebase and build app
 fire.settings.ref.on('value', function(settings) {
     // create router for pages
     function router(hash) {
-        if (hash === '#/police') {
+        if (hash === 'police') {
             ReactDOM.render((<Police settings={settings.val()}/>), document.getElementById('app'));
-        } else if (hash === '#/officials') {
+        } else if (hash === 'officials') {
             ReactDOM.render((<Officials settings={settings.val()}/>), document.getElementById('app'));
-        } else if (hash === '#/offices') {
-          fire.offices.ref.on('value', function(offices) {
-            ReactDOM.render((<Offices settings={settings.val()} offices={offices.val()} />), document.getElementById('app'));
-          });
-        } else if (hash === '#/login') {
+        } else if (hash === 'offices') {
+            fire.offices.ref.on('value', function(offices) {
+                ReactDOM.render((<Offices settings={settings.val()} offices={offices.val()}/>), document.getElementById('app'));
+            });
+        } else if (hash === 'login') {
             ReactDOM.render((<Login settings={settings.val()}/>), document.getElementById('app'));
-        } else if (hash === '#/signup') {
+        } else if (hash === 'signup') {
             ReactDOM.render((<Signup settings={settings.val()}/>), document.getElementById('app'));
         } else {
             ReactDOM.render((<Home settings={settings.val()}/>), document.getElementById('app'));
@@ -59,7 +59,14 @@ fire.settings.ref.on('value', function(settings) {
     }
     // listen for page changes
     window.addEventListener('hashchange', function(event) {
-        router(window.location.hash);
+        let hash = window.location.hash.slice(2);
+        let query = hash.substring(hash.indexOf('?') + 1);
+        var result = {};
+        query.split('&').forEach(function(part) {
+            var item = part.split('=');
+            result[item[0]] = decodeURIComponent(item[1]);
+        });
+        router(hash);
     });
     // init app build based off of hash
     router(window.location.hash);

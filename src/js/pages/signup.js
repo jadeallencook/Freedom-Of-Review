@@ -46,10 +46,10 @@ class SignupForm extends Component {
         // build the form
         return (
             <div id="signup-form">
-                <h1>Start writing reviews!</h1>
+                <h1>Sign Up</h1>
                 <input type="text" id="signup-email" placeholder="Email"/><br/>
                 <input type="password" id="signup-password" placeholder="Password"/><br/>
-                <input type="submit" onClick={signupUser} value="Signup"/>
+                <input type="submit" onClick={signupUser} value="Sign Up"/>
             </div>
         );
     }
