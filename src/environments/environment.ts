@@ -5,5 +5,13 @@
 
 export const environment = {
   production: false,
-  currentPage: 'home'
+  currentPage: 'home',
+  firebaseConfig: {
+    apiKey: "AIzaSyCuJveVulLMTP2HOm1XFiLDjCHo2EOHDbM",
+    authDomain: "freedom-of-review.firebaseapp.com",
+    databaseURL: "https://freedom-of-review.firebaseio.com",
+    projectId: "freedom-of-review",
+    storageBucket: "freedom-of-review.appspot.com",
+    messagingSenderId: "676763741871"
+  }
 };

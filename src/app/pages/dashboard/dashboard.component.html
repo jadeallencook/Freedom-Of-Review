@@ -1,3 +1,24 @@
-<p>
-  dashboard works!
-</p>
+<div id="dashboard-wrapper">
+
+  <div class="container">
+    <div id="login-panel" *ngIf="!this.FirebaseAuthService.ActiveUser">
+      <h1>Login</h1>
+      <p *ngIf="this.FirebaseAuthService.errorMsg.length !== 0" class="error-msg">{{this.FirebaseAuthService.errorMsg}}</p>
+      <div class="form-group">
+        <input [(ngModel)]="email" class="form-control login-input" type="text" placeholder="Email">
+        <input [(ngModel)]="password" class="form-control login-input" type="password" placeholder="Password">
+      </div>
+      <span><i>Anonymous Vigilante</i></span>
+      <button (click)="this.FirebaseAuthService.login(this.email, this.password)" class="btn btn-default">Login</button> or
+      <button (click)="this.FirebaseAuthService.login(this.email, this.password)" class="btn btn-default">Create Account</button>
+    </div>
+    <div id="dashboard-panel" *ngIf="this.FirebaseAuthService.ActiveUser">
+      <h1>Welcome!</h1>
+      <br />
+      <p>Thank you for joining our efforts to make the streets safer. Our dashboard is currently under construction but will be available soon. We will be sending out an email as soon as everything is up and running. In the meantime, feel free to submit to our database and leave reviews!</p>
+      <a routerLink="../search/all">Read Reviews</a><br />
+      <a (click)="this.FirebaseAuthService.logout()">Log Off</a>
+    </div>
+  </div>
+
+</div>

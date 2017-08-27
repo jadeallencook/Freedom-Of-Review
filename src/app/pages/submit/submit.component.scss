@@ -8,9 +8,9 @@ div#submit-color-overlay {
   color: #fff;
 }
 div#submit-wrapper {
-  background-image: url('../../../assets/dirty-police-car.jpg');
+  background-image: url('../../../assets/government-building.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: top left;
 }
 
 div#submit-color-overlay {
@@ -38,7 +38,7 @@ span#submit-footer {
   margin-top: 15px;
 }
 
-input.name-input {
+input.half-input {
   width: 50%;
 }
 
@@ -49,4 +49,9 @@ input.name-input {
 button#submit-btn {
   float: left;
   display: block;
+}
+
+span#vigilante {
+  float: left;
+  padding: 7px 15px;
 }

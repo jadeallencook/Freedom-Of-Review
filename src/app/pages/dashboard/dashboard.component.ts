@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { FirebaseAuthService } from '../../services/firebase-auth.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +9,14 @@ import { environment } from '../../../environments/environment';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  email:string;
+  password: string;
+
+  constructor(private FirebaseAuthService: FirebaseAuthService) { }
 
   ngOnInit() {
     environment.currentPage = 'dashboard';
+    this.FirebaseAuthService.errorMsg = '';
   }
 
 }
