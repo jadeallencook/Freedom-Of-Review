@@ -1,0 +1,39 @@
+@import '../../../colors';
+
+div#home-wrapper,
+div#home-color-overlay {
+  height: 100%;
+  width: 100%;
+  background-color: $blue;
+  color: #fff;
+}
+div#home-wrapper {
+  background-image: url('../../../assets/dirty-police-car.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+div#home-color-overlay {
+  background: rgba($blue, 0.75);
+}
+
+h1#home-title {
+  margin-bottom: 15px;
+}
+
+div#home-form div.input-group,
+div#home-form {
+  text-align: center;
+  width: 100%;
+}
+
+div#home-form {
+  position: absolute;
+  margin: 0px auto;
+  top: 40%;
+}
+
+span#home-footer {
+  display: block;
+  margin-top: 15px;
+}
