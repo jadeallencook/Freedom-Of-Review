@@ -1,0 +1,52 @@
+@import '../../../colors';
+
+div#submit-wrapper,
+div#submit-color-overlay {
+  height: 100%;
+  width: 100%;
+  background-color: $blue;
+  color: #fff;
+}
+div#submit-wrapper {
+  background-image: url('../../../assets/dirty-police-car.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+div#submit-color-overlay {
+  background: rgba($blue, 0.75);
+}
+
+h1#submit-title {
+  margin-bottom: 15px;
+}
+
+div#submit-form div.input-group,
+div#submit-form {
+  text-align: center;
+  width: 100%;
+}
+
+div#submit-form {
+  position: absolute;
+  margin: 0px auto;
+  top: 30%;
+}
+
+span#submit-footer {
+  display: block;
+  margin-top: 15px;
+}
+
+input.name-input {
+  width: 50%;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+button#submit-btn {
+  float: left;
+  display: block;
+}

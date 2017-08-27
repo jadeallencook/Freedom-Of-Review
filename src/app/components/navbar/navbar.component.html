@@ -14,7 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li [ngClass]="{active: this.environment.currentPage === 'review'}"><a routerLink="review">Review</a></li>
+        <li [ngClass]="{active: this.environment.currentPage === 'home'}"><a routerLink="home">Home</a></li>
         <li [ngClass]="{active: this.environment.currentPage === 'submit'}"><a routerLink="submit">Submit</a></li>
         <li [ngClass]="{active: this.environment.currentPage === 'dashboard'}"><a routerLink="dashboard">Account</a></li>
         <li [ngClass]="{active: this.environment.currentPage === 'search'}" class="dropdown">
@@ -23,6 +23,7 @@
             <li><a routerLink="search/police">Police</a></li>
             <li><a href="search/teachers">Teachers</a></li>
             <li><a href="search/employees">Employees</a></li>
+            <li><a href="search/offices">Offices</a></li>
             <li><a href="search/congress">Congress</a></li>
             <li><a href="search/presidents">Presidents</a></li>
           </ul>
