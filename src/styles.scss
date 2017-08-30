@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import './colors';
+
 html,
 body {
   margin: 0px;
@@ -6,6 +8,7 @@ body {
   height: 100%;
   width: 100%;
   font-weight: 200;
+  background-color: $blue;
 }
 
 h1, h2, h3 {

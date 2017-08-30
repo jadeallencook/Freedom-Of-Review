@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { environment } from '../environments/environment';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,8 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  constructor() {
+      // init firebase connection
+      firebase.initializeApp(environment.firebaseConfig);
+  }
 }

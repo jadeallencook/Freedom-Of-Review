@@ -1,3 +1,38 @@
-<p>
-  search works!
-</p>
+<div id="search-wrapper">
+  <div class="container">
+
+    <div class="input-group">
+      <input type="text" class="form-control first-name" [(ngModel)]="this.searchParams.firstName" placeholder="First Name">
+      <input type="text" class="form-control last-name" [(ngModel)]="this.searchParams.lastName" placeholder="Last Name">
+      <input type="text" class="form-control id-number" [(ngModel)]="this.searchParams.idNumber" placeholder="Badge/ID#">
+      <input type="text" class="form-control zipcode" [(ngModel)]="this.searchParams.zipcode" placeholder="Zipcode">
+      <button class="btn btn-default" (click)="this.refineSearch()" type="button">Refine</button>
+    </div>
+
+    <div class="table-responsive">
+      <h1 *ngIf="!searchResultsArray && searchResultsArray !== null">Searching...</h1>
+      <h1 *ngIf="searchResultsArray === null">No Results Found</h1>
+      <table *ngIf="searchResultsArray" class="table table-bordered table-hover" id="results-table">
+        <thead>
+          <tr>
+            <th>First</th>
+            <th>Last</th>
+            <th>ID#</th>
+            <th>Zipcode</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="searchResultsArray">
+          <tr class="search-result" *ngFor="let searchResult of searchResultsArray" routerLink="/review/{{searchResult.uid}}">
+            <td class="first-name">{{searchResult.first}}</td>
+            <td class="last-name">{{searchResult.last}}</td>
+            <td class="id">{{searchResult.id}}</td>
+            <td class="zipcode">{{searchResult.zip}}</td>
+            <td class="category">{{searchResult.category}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <span *ngIf="searchResultsArray">Here's what I could find!</span>
+    </div>
+  </div>
+</div>

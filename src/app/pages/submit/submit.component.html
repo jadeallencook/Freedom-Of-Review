@@ -3,33 +3,45 @@
     <div id="submit-form" class="container">
       <div class="input-group">
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
+          <div class="col-md-6 col-md-offset-3" *ngIf="!this.submitSuccess">
+
+            <!-- form header -->
             <h1 id="submit-title">Add To Database</h1>
-            <select class="form-control">
-                <option value="law">Law and Law Enforcement</option>
-                <option value="education">Education</option>
-                <option value="medicine">Medicine</option>
-                <option value="employee">Public Employee</option>
+            <span id="mini-msg">Some government employees are added automatically by our web scrapper.</span>
+
+            <!-- category dropdown menu -->
+            <select class="form-control" [(ngModel)]="category">
+              <!-- block out server added categories -->
+              <ng-container *ngFor="let categoryObj of this.environment.categories">
+                <option *ngIf="!categoryObj.blocked" value="{{ categoryObj.category }}">{{ categoryObj.single }}</option>
+              </ng-container>
             </select>
+
+            <!-- form manuel inputs -->
             <div class="form-group">
-              <input type="text" class="form-control half-input" id="first-name" placeholder="First Name">
-              <input type="text" class="form-control half-input" id="last-name" placeholder="Last Name">
+              <input type="text" class="form-control half-input" id="first-name" [(ngModel)]="firstName" placeholder="First Name">
+              <input type="text" class="form-control half-input" id="last-name" [(ngModel)]="lastName" placeholder="Last Name">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control half-input" id="badge-number" placeholder="Badge Number">
-              <input type="text" class="form-control half-input" id="job-title" placeholder="Job Title">
+              <input type="number" class="form-control half-input" id="id-number" [(ngModel)]="idNumber" placeholder="Badge or ID # (optional)">
+              <input type="number" class="form-control half-input" id="zipcode" [(ngModel)]="zipcode" placeholder="Zipcode">
             </div>
-            <div class="form-group">
-              <input type="text" class="form-control half-input" id="office-name" placeholder="Office Name">
-              <input type="text" class="form-control half-input" id="city" placeholder="City">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control half-input" id="state" placeholder="State">
-              <input type="number" class="form-control half-input" id="zipcode" placeholder="Zipcode">
-            </div>
-            <button type="submit" class="btn btn-default" id="submit-btn">Submit</button>
+
+            <!-- submit/footer -->
+            <button type="submit" class="btn btn-default" id="submit-btn" (click)="this.writeUserData()">Submit</button>
             <span id="vigilante"><i>Anonymous Vigilante</i></span>
+
           </div>
+
+          <!-- sucessfully submited -->
+          <div class="col-md-6 col-md-offset-3" *ngIf="this.submitSuccess">
+            <!-- form header -->
+            <h1 id="submit-title">Success!</h1>
+            <span id="mini-msg">Thank you for helping keep the streets a safe place.</span>
+            <button (click)="this.addAnother()" class="btn btn-default">Add Another</button>
+            <button routerLink="/search/all" class="btn btn-danger">Read Reviews</button>
+          </div>
+
         </div>
       </div>
     </div>
