@@ -21,7 +21,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'review', component: ReviewComponent },
+  { path: 'review/:uid', component: ReviewComponent },
   { path: 'submit', component: SubmitComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'search/:type', component: SearchComponent },
